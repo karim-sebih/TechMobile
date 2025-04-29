@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechMobile - Premium Smartphones</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Custom CSS for enhancements */
+.hero-gradient {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.product-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0,
+0.04);
+}
+.cart-panel {
+transition: all 0.3s ease;
+}
+.cart-open {
+right: 0;
+}
+.cart-closed {
+right: -100%;
+}
+.brand-logo {
+filter: grayscale(100%) brightness(0.5);
+transition: all 0.3s ease;
+}
+.brand-logo:hover {
+filter: grayscale(0%) brightness(1);
+}
+.phone-image {
+transition: all 0.3s ease;
+}
+.phone-image:hover {
+transform: scale(1.05);
+}
+</style>
+</head>
+<body class="bg-gray-50 font-sans">
+<!-- Header/Navigation -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+<div class="container mx-auto px-4 py-3 flex justify-between items-center">
+<div class="flex items-center space-x-2">
+
+<i class="fas fa-mobile-alt text-2xl text-indigo-600"></i>
+<h1 class="text-xl font-bold text-gray-800">TechMobile</h1>
+</div>
+<nav class="hidden md:flex space-x-8">
+<a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+<a href="#products" class="text-gray-700 hover:text-indigo-600
+font-medium">Products</a>
+<a href="#brands" class="text-gray-700 hover:text-indigo-600
+font-medium">Brands</a>
+<a href="#features" class="text-gray-700 hover:text-indigo-600
+font-medium">Features</a>
+<a href="#contact" class="text-gray-700 hover:text-indigo-600
+font-medium">Contact</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button id="search-btn" class="text-gray-600 hover:text-indigo-600">
+<i class="fas fa-search"></i>
+</button>
+<button id="cart-btn" class="relative text-gray-600 hover:text-indigo-600">
+<i class="fas fa-shopping-cart text-xl"></i>
+<span id="cart-count" class="absolute -top-2 -right-2 bg-indigo-600 text-white
+
+text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+</button>
+<button class="md:hidden text-gray-600" id="mobile-menu-btn">
+<i class="fas fa-bars text-xl"></i>
+</button>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-md">
+<a href="#" class="block py-2 text-gray-700 hover:text-indigo-600">Home</a>
+<a href="#products" class="block py-2 text-gray-700
+hover:text-indigo-600">Products</a>
+<a href="#brands" class="block py-2 text-gray-700
+hover:text-indigo-600">Brands</a>
+<a href="#features" class="block py-2 text-gray-700
+hover:text-indigo-600">Features</a>
+<a href="#contact" class="block py-2 text-gray-700
+hover:text-indigo-600">Contact</a>
+</div>
+<!-- Search Bar -->
+<div id="search-bar" class="hidden bg-white py-3 px-4 shadow-md">
+<div class="container mx-auto flex">
+
+<input type="text" placeholder="Search for phones, brands..." class="flex-grow
+px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2
+focus:ring-indigo-500">
+<button class="bg-indigo-600 text-white px-4 py-2 rounded-r-lg
+hover:bg-indigo-700">
+
+<i class="fas fa-search"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Shopping Cart Sidebar -->
+<div id="cart-panel" class="cart-panel fixed top-0 h-full w-full md:w-96 bg-white shadow-xl
+z-50 overflow-y-auto cart-closed">
+<div class="p-4 border-b flex justify-between items-center">
+<h3 class="text-lg font-semibold">Your Cart</h3>
+<button id="close-cart" class="text-gray-500 hover:text-gray-700">
+<i class="fas fa-times"></i>
+</button>
+</div>
+<div id="cart-items" class="p-4">
+<!-- Cart items will be added here dynamically -->
+<p class="text-gray-500 text-center py-8">Your cart is empty</p>
+</div>
+<div class="p-4 border-t">
+<div class="flex justify-between mb-4">
+<span class="font-medium">Subtotal:</span>
+<span id="cart-subtotal" class="font-medium">$0.00</span>
+</div>
+<button class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700
+transition">
+Proceed to Checkout
+</button>
+</div>
+</div>
+<div id="cart-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+<!-- Hero Section -->
+<section class="hero-gradient text-white py-16 md:py-24">
+<div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 mb-8 md:mb-0">
+<h2 class="text-3xl md:text-5xl font-bold mb-4">The Latest Smartphones</h2>
+<p class="text-lg md:text-xl mb-6 opacity-90">Discover our premium collection of
+cutting-edge mobile devices with the best prices and warranty.</p>
+<div class="flex space-x-4">
+<button class="bg-white text-indigo-600 px-6 py-2 rounded-lg font-medium
+
+hover:bg-gray-100 transition">
+Shop Now
+
+</button>
+<button class="border border-white text-white px-6 py-2 rounded-lg font-medium
+
+hover:bg-white hover:text-indigo-600 transition">
+
+View Deals
+</button>
+</div>
+</div>
+<div class="md:w-1/2 flex justify-center">
+<img
+src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&ixid
+=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=cro
+p&w=800&q=80" alt="Premium Smartphones" class="w-full max-w-md phone-image">
+</div>
+</div>
+</section>
+<!-- Featured Categories -->
+<section class="py-12 bg-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Shop by Category</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md
+transition cursor-pointer">
+
+<div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-3">
+
+<i class="fas fa-mobile-alt text-indigo-600 text-2xl"></i>
+</div>
+<h3 class="font-medium">Flagship Phones</h3>
+<p class="text-sm text-gray-500 mt-1">Premium devices</p>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md
+transition cursor-pointer">
+
+<div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-3">
+
+<i class="fas fa-dollar-sign text-blue-600 text-2xl"></i>
+</div>
+<h3 class="font-medium">Budget Phones</h3>
+<p class="text-sm text-gray-500 mt-1">Great value</p>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md
+transition cursor-pointer">
+
+<div class="bg-green-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-3">
+
+<i class="fas fa-camera text-green-600 text-2xl"></i>
+</div>
+<h3 class="font-medium">Camera Phones</h3>
+<p class="text-sm text-gray-500 mt-1">Best photography</p>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md
+transition cursor-pointer">
+
+<div class="bg-purple-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-3">
+
+<i class="fas fa-battery-full text-purple-600 text-2xl"></i>
+</div>
+<h3 class="font-medium">Long Battery Life</h3>
+<p class="text-sm text-gray-500 mt-1">Power that lasts</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Products Section -->
+<section id="products" class="py-12 bg-white">
+<div class="container mx-auto px-4">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-2xl md:text-3xl font-bold">Featured Products</h2>
+<div class="flex space-x-2">
+<button class="px-3 py-1 border rounded-l-lg hover:bg-gray-100">All</button>
+<button class="px-3 py-1 border-t border-b hover:bg-gray-100">New</button>
+<button class="px-3 py-1 border-t border-b
+
+hover:bg-gray-100">Popular</button>
+
+<button class="px-3 py-1 border rounded-r-lg
+
+hover:bg-gray-100">Deals</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Product 1 -->
+<div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border
+border-gray-100 transition duration-300">
+<div class="relative">
+<img
+
+src="https://images.unsplash.com/photo-1603921326210-6edd6d0bfc95?ixlib=rb-4.0.3&ixid=
+M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop
+&w=800&q=80" alt="iPhone 14 Pro" class="w-full h-48 object-contain">
+
+<span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1
+
+rounded">HOT</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-semibold text-gray-800">iPhone 14 Pro</h3>
+<p class="text-sm text-gray-500">Apple</p>
+</div>
+<div class="flex items-center text-yellow-400">
+<i class="fas fa-star"></i>
+
+<span class="text-gray-600 text-sm ml-1">4.9</span>
+</div>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<span class="font-bold text-gray-800">$999.00</span>
+<button class="add-to-cart bg-indigo-600 text-white p-2 rounded-full
+hover:bg-indigo-700 transition" data-id="1" data-name="iPhone 14 Pro" data-price="999"
+data-image="https://images.unsplash.com/photo-1603921326210-6edd6d0bfc95?ixlib=rb-4.
+0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=forma
+t&fit=crop&w=800&q=80">
+
+<i class="fas fa-cart-plus"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border
+border-gray-100 transition duration-300">
+<div class="relative">
+<img
+
+src="https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?ixlib=rb-4.0.3&ixid
+=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=cro
+p&w=800&q=80" alt="Samsung Galaxy S23" class="w-full h-48 object-contain">
+
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-semibold text-gray-800">Galaxy S23 Ultra</h3>
+<p class="text-sm text-gray-500">Samsung</p>
+</div>
+<div class="flex items-center text-yellow-400">
+<i class="fas fa-star"></i>
+<span class="text-gray-600 text-sm ml-1">4.8</span>
+</div>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<span class="font-bold text-gray-800">$1,199.00</span>
+<button class="add-to-cart bg-indigo-600 text-white p-2 rounded-full
+hover:bg-indigo-700 transition" data-id="2" data-name="Galaxy S23 Ultra" data-price="1199"
+data-image="https://images.unsplash.com/photo-1610792516307-ea5acd9c3b00?ixlib=rb-4.
+0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=forma
+t&fit=crop&w=800&q=80">
+
+<i class="fas fa-cart-plus"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 3 -->
+<div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border
+border-gray-100 transition duration-300">
+<div class="relative">
+<img
+
+src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.0.3&ixid=
+M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop
+&w=800&q=80" alt="Google Pixel 7 Pro" class="w-full h-48 object-contain">
+
+<span class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1
+
+rounded">NEW</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-semibold text-gray-800">Pixel 7 Pro</h3>
+<p class="text-sm text-gray-500">Google</p>
+</div>
+<div class="flex items-center text-yellow-400">
+<i class="fas fa-star"></i>
+<span class="text-gray-600 text-sm ml-1">4.7</span>
+</div>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<span class="font-bold text-gray-800">$899.00</span>
+<button class="add-to-cart bg-indigo-600 text-white p-2 rounded-full
+hover:bg-indigo-700 transition" data-id="3" data-name="Pixel 7 Pro" data-price="899"
+data-image="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-4.
+0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=forma
+t&fit=crop&w=800&q=80">
+
+<i class="fas fa-cart-plus"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border
+border-gray-100 transition duration-300">
+<div class="relative">
+<img
+
+src="https://images.unsplash.com/photo-1624561172888-ac93c696e10c?ixlib=rb-4.0.3&ixid
+=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=cro
+p&w=800&q=80" alt="OnePlus 11" class="w-full h-48 object-contain">
+
+<span class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1
+
+rounded">SALE</span>
+</div>
+<div class="p-4">
+
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-semibold text-gray-800">OnePlus 11</h3>
+<p class="text-sm text-gray-500">OnePlus</p>
+</div>
+<div class="flex items-center text-yellow-400">
+<i class="fas fa-star"></i>
+<span class="text-gray-600 text-sm ml-1">4.6</span>
+</div>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<div>
+<span class="font-bold text-gray-800">$699.00</span>
+<span class="text-sm text-gray-400 line-through ml-2">$799.00</span>
+</div>
+<button class="add-to-cart bg-indigo-600 text-white p-2 rounded-full
+hover:bg-indigo-700 transition" data-id="4" data-name="OnePlus 11" data-price="699"
+data-image="https://images.unsplash.com/photo-1624561172888-ac93c696e10c?ixlib=rb-4.
+0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=forma
+t&fit=crop&w=800&q=80">
+
+<i class="fas fa-cart-plus"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="text-center mt-10">
+<button class="border border-indigo-600 text-indigo-600 px-6 py-2 rounded-lg
+font-medium hover:bg-indigo-600 hover:text-white transition">
+
+View All Products
+</button>
+</div>
+</div>
+</section>
+<!-- Brands Section -->
+<section id="brands" class="py-12 bg-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Our Trusted Brands</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+<div class="flex justify-center items-center p-4">
+<img
+
+src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple"
+class="h-12 brand-logo">
+</div>
+<div class="flex justify-center items-center p-4">
+
+<img
+
+src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg"
+alt="Samsung" class="h-10 brand-logo">
+</div>
+<div class="flex justify-center items-center p-4">
+<img
+
+src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Google_2015_logo.svg"
+alt="Google" class="h-10 brand-logo">
+</div>
+<div class="flex justify-center items-center p-4">
+<img
+
+src="https://upload.wikimedia.org/wikipedia/commons/2/2e/OnePlus_logo_2015.svg"
+alt="OnePlus" class="h-8 brand-logo">
+</div>
+<div class="flex justify-center items-center p-4">
+<img
+
+src="https://upload.wikimedia.org/wikipedia/commons/1/15/Xiaomi_logo.svg" alt="Xiaomi"
+class="h-10 brand-logo">
+</div>
+<div class="flex justify-center items-center p-4">
+<img
+
+src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Huawei_logo_2019.svg"
+alt="Huawei" class="h-10 brand-logo">
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section id="features" class="py-12 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="text-2xl md:text-3xl font-bold text-center mb-12">Why Choose
+TechMobile?</h2>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+<div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-4">
+
+<i class="fas fa-shield-alt text-indigo-600 text-2xl"></i>
+</div>
+<h3 class="font-semibold text-lg mb-2">2-Year Warranty</h3>
+<p class="text-gray-600">All our products come with an extended 2-year
+
+warranty for your peace of mind.</p>
+</div>
+<div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+<div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-4">
+
+<i class="fas fa-truck text-blue-600 text-2xl"></i>
+</div>
+
+<h3 class="font-semibold text-lg mb-2">Free Shipping</h3>
+<p class="text-gray-600">Free express shipping on all orders over $50 with
+
+delivery within 2-3 business days.</p>
+</div>
+<div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+<div class="bg-green-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-4">
+
+<i class="fas fa-exchange-alt text-green-600 text-2xl"></i>
+</div>
+<h3 class="font-semibold text-lg mb-2">Easy Returns</h3>
+<p class="text-gray-600">Not satisfied? Return within 30 days for a full refund,
+
+no questions asked.</p>
+</div>
+<div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+<div class="bg-purple-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-4">
+
+<i class="fas fa-headset text-purple-600 text-2xl"></i>
+</div>
+<h3 class="font-semibold text-lg mb-2">24/7 Support</h3>
+<p class="text-gray-600">Our customer service team is available round the
+
+clock to assist you.</p>
+</div>
+<div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+<div class="bg-yellow-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-4">
+
+<i class="fas fa-lock text-yellow-600 text-2xl"></i>
+</div>
+<h3 class="font-semibold text-lg mb-2">Secure Payments</h3>
+<p class="text-gray-600">Shop with confidence using our secure payment
+
+gateway with encryption.</p>
+</div>
+<div class="text-center p-6 rounded-lg hover:bg-gray-50 transition">
+<div class="bg-red-100 w-16 h-16 mx-auto rounded-full flex items-center
+
+justify-center mb-4">
+
+<i class="fas fa-gift text-red-600 text-2xl"></i>
+</div>
+<h3 class="font-semibold text-lg mb-2">Exclusive Deals</h3>
+<p class="text-gray-600">Subscribers get access to exclusive deals and early
+
+product launches.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-12 bg-gray-50">
+<div class="container mx-auto px-4">
+
+<h2 class="text-2xl md:text-3xl font-bold text-center mb-8">What Our Customers
+Say</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="bg-white p-6 rounded-lg shadow-sm">
+<div class="flex items-center mb-4">
+<div class="flex items-center text-yellow-400 mr-2">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<span class="text-sm text-gray-500">2 days ago</span>
+</div>
+<p class="text-gray-700 mb-4">"The iPhone 14 Pro I bought from TechMobile
+arrived earlier than expected and was perfectly packaged. The customer service was
+excellent when I had questions about the warranty."</p>
+
+<div class="flex items-center">
+<img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J."
+
+class="w-10 h-10 rounded-full mr-3">
+
+<div>
+<h4 class="font-medium">Sarah J.</h4>
+<p class="text-sm text-gray-500">Verified Buyer</p>
+</div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm">
+<div class="flex items-center mb-4">
+<div class="flex items-center text-yellow-400 mr-2">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+<span class="text-sm text-gray-500">1 week ago</span>
+</div>
+<p class="text-gray-700 mb-4">"I was hesitant to buy a phone online, but
+TechMobile made the process so easy. My Galaxy S23 Ultra is flawless, and the free
+accessories they included were a nice surprise!"</p>
+<div class="flex items-center">
+<img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T."
+
+class="w-10 h-10 rounded-full mr-3">
+
+<div>
+<h4 class="font-medium">Michael T.</h4>
+<p class="text-sm text-gray-500">Verified Buyer</p>
+</div>
+</div>
+
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm">
+<div class="flex items-center mb-4">
+<div class="flex items-center text-yellow-400 mr-2">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half-alt"></i>
+</div>
+<span class="text-sm text-gray-500">3 weeks ago</span>
+</div>
+<p class="text-gray-700 mb-4">"Great prices and fast shipping. My Pixel 7 Pro
+works perfectly, and I love the free cloud storage offer that came with it. Will definitely shop
+here again for my next phone."</p>
+<div class="flex items-center">
+<img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jennifer L."
+
+class="w-10 h-10 rounded-full mr-3">
+
+<div>
+<h4 class="font-medium">Jennifer L.</h4>
+<p class="text-sm text-gray-500">Verified Buyer</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter -->
+<section class="py-12 bg-indigo-600 text-white">
+<div class="container mx-auto px-4 text-center">
+<h2 class="text-2xl md:text-3xl font-bold mb-4">Stay Updated</h2>
+<p class="max-w-2xl mx-auto mb-6 opacity-90">Subscribe to our newsletter for the
+latest product releases, exclusive deals, and tech news.</p>
+<div class="max-w-md mx-auto flex">
+<input type="email" placeholder="Your email address" class="flex-grow px-4 py-3
+rounded-l-lg focus:outline-none text-gray-800">
+<button class="bg-indigo-800 px-6 py-3 rounded-r-lg font-medium
+hover:bg-indigo-900 transition">
+Subscribe
+</button>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-12 bg-white">
+<div class="container mx-auto px-4">
+
+<h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Contact Us</h2>
+<div class="grid md:grid-cols-2 gap-8">
+<div>
+<h3 class="text-xl font-semibold mb-4">Get in Touch</h3>
+<p class="text-gray-600 mb-6">Have questions about our products or need
+
+assistance with your order? Our team is here to help.</p>
+
+<div class="space-y-4">
+<div class="flex items-start">
+<div class="bg-indigo-100 p-2 rounded-full mr-4">
+<i class="fas fa-map-marker-alt text-indigo-600"></i>
+</div>
+<div>
+<h4 class="font-medium">Address</h4>
+<p class="text-gray-600">123 Tech Street, Silicon Valley, CA 94025</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="bg-blue-100 p-2 rounded-full mr-4">
+<i class="fas fa-phone-alt text-blue-600"></i>
+</div>
+<div>
+<h4 class="font-medium">Phone</h4>
+<p class="text-gray-600">+1 (800) 123-4567</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="bg-green-100 p-2 rounded-full mr-4">
+<i class="fas fa-envelope text-green-600"></i>
+</div>
+<div>
+<h4 class="font-medium">Email</h4>
+<p class="text-gray-600">support@techmobile.com</p>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<h4 class="font-medium mb-3">Follow Us</h4>
+<div class="flex space-x-4">
+<a href="#" class="bg-gray-100 w-10 h-10 rounded-full flex items-center
+
+justify-center text-gray-600 hover:bg-indigo-600 hover:text-white transition">
+
+<i class="fab fa-facebook-f"></i>
+</a>
+<a href="#" class="bg-gray-100 w-10 h-10 rounded-full flex items-center
+
+justify-center text-gray-600 hover:bg-blue-400 hover:text-white transition">
+
+<i class="fab fa-twitter"></i>
+</a>
+
+<a href="#" class="bg-gray-100 w-10 h-10 rounded-full flex items-center
+
+justify-center text-gray-600 hover:bg-pink-600 hover:text-white transition">
+
+<i class="fab fa-instagram"></i>
+</a>
+<a href="#" class="bg-gray-100 w-10 h-10 rounded-full flex items-center
+
+justify-center text-gray-600 hover:bg-red-600 hover:text-white transition">
+
+<i class="fab fa-youtube"></i>
+</a>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-semibold mb-4">Send Us a Message</h3>
+<form class="space-y-4">
+<div>
+<label for="name" class="block text-sm font-medium text-gray-700
+
+mb-1">Name</label>
+
+<input type="text" id="name" class="w-full px-4 py-2 border
+
+border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700
+
+mb-1">Email</label>
+
+<input type="email" id="email" class="w-full px-4 py-2 border
+border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+
+</div>
+<div>
+<label for="subject" class="block text-sm font-medium text-gray-700
+
+mb-1">Subject</label>
+
+<input type="text" id="subject" class="w-full px-4 py-2 border
+border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+
+</div>
+<div>
+<label for="message" class="block text-sm font-medium text-gray-700
+
+mb-1">Message</label>
+
+<textarea id="message" rows="4" class="w-full px-4 py-2 border
+
+border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500
+focus:border-indigo-500"></textarea>
+
+</div>
+<button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg
+
+font-medium hover:bg-indigo-700 transition">
+
+Send Message
+</button>
+</form>
+</div>
+</div>
+</div>
+
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-8">
+<div class="container mx-auto px-4">
+<div class="grid md:grid-cols-4 gap-8">
+<div>
+<div class="flex items-center space-x-2 mb-4">
+<i class="fas fa-mobile-alt text-2xl text-indigo-400"></i>
+<h3 class="text-xl font-bold">TechMobile</h3>
+</div>
+<p class="text-gray-400">Your trusted source for premium smartphones and
+
+accessories at competitive prices.</p>
+</div>
+<div>
+<h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white
+
+transition">Home</a></li>
+
+<li><a href="#products" class="text-gray-400 hover:text-white
+
+transition">Products</a></li>
+
+<li><a href="#brands" class="text-gray-400 hover:text-white
+
+transition">Brands</a></li>
+
+<li><a href="#features" class="text-gray-400 hover:text-white
+
+transition">Features</a></li>
+
+<li><a href="#contact" class="text-gray-400 hover:text-white
+
+transition">Contact</a></li>
+
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-lg mb-4">Customer Service</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white
+
+transition">FAQs</a></li>
+
+<li><a href="#" class="text-gray-400 hover:text-white transition">Shipping
+
+Policy</a></li>
+
+<li><a href="#" class="text-gray-400 hover:text-white transition">Return
+
+Policy</a></li>
+
+<li><a href="#" class="text-gray-400 hover:text-white transition">Privacy
+
+Policy</a></li>
+
+<li><a href="#" class="text-gray-400 hover:text-white transition">Terms of
+
+Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-lg mb-4">Payment Methods</h4>
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-gray-800 p-3 rounded flex items-center justify-center">
+
+<i class="fab fa-cc-visa text-2xl"></i>
+</div>
+<div class="bg-gray-800 p-3 rounded flex items-center justify-center">
+<i class="fab fa-cc-mastercard text-2xl"></i>
+</div>
+<div class="bg-gray-800 p-3 rounded flex items-center justify-center">
+<i class="fab fa-cc-amex text-2xl"></i>
+</div>
+<div class="bg-gray-800 p-3 rounded flex items-center justify-center">
+<i class="fab fa-cc-paypal text-2xl"></i>
+</div>
+<div class="bg-gray-800 p-3 rounded flex items-center justify-center">
+<i class="fab fa-apple-pay text-2xl"></i>
+</div>
+<div class="bg-gray-800 p-3 rounded flex items-center justify-center">
+<i class="fab fa-google-pay text-2xl"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+<p>&copy; 2023 TechMobile. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Scripts -->
+ <script src="./"></script>
+</body>
+</html>
