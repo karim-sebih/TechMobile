@@ -1,0 +1,12 @@
+/* Public/css/home.css */
+main {
+    background-color: #e6f3ff; /* Fond bleu clair pour la page d'accueil */
+}
+
+main,
+ H1,  {
+
+    color: #68b300;
+    font-weight: bold;
+}
+

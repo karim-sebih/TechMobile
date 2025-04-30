@@ -1,0 +1,53 @@
+/* Public/css/home.css */
+.display {
+    background-color: #7628F4; /* Fond bleu clair pour la page d'accueil */
+}
+
+b
+
+main
+ H1,
+ h2  {
+
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+.content,
+.features{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.features-content{
+    width: 200px;
+    text-align: center;
+    height: 420px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.brand{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    
+    justify-content: space-between;
+}
+
+
+.brand img {
+    width: 200px;
+    height: auto;
+    
+}
