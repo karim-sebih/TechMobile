@@ -72,8 +72,7 @@
     <div class="products-display">
   <h2>Products :</h2>
 <?php>
-
-?>
+</
 </div>
 
 

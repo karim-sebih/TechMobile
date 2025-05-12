@@ -1,3 +1,4 @@
+import HttpClient from "./HttpClient.js";
 import { ROUTER_PATH } from "../config.js";
 
 function Router(resource) {
