@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { MAIN_ID, ROUTER_PATH } from '../config.js';
 
 console.log('PageLoader.js chargé');
@@ -12,23 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('MAIN_CONTAINER non trouvé avec l\'ID:', MAIN_ID);
     }
 });
-=======
-import { MAIN_CONTAINER } from '../config.js'; // Assurez-vous que le chemin est correct
-
-// Ajout de débogage
-console.log('PageLoader.js chargé, MAIN_CONTAINER:', MAIN_CONTAINER);
->>>>>>> 5bf764b (refont backend)
 
 async function fileExists(filepath) {
     try {
         const response = await fetch(filepath, { method: 'HEAD' });
         return response.ok;
-<<<<<<< HEAD
     } catch (error) {
         console.warn('fileExists failed for:', filepath, error);
-=======
-    } catch {
->>>>>>> 5bf764b (refont backend)
         return false;
     }
 }
@@ -36,11 +25,7 @@ async function fileExists(filepath) {
 async function getApiContent(resource) {
     console.log('Récupération du contenu pour:', resource);
     try {
-<<<<<<< HEAD
         const response = await fetch(`${ROUTER_PATH}?resource=${encodeURIComponent(resource)}`, {
-=======
-        const response = await fetch(`router.php?resource=${encodeURIComponent(resource)}`, {
->>>>>>> 5bf764b (refont backend)
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,7 +33,6 @@ async function getApiContent(resource) {
         });
         if (!response.ok) {
             console.error('Réponse non OK pour', resource, response.status, response.statusText);
-<<<<<<< HEAD
             throw new Error(`Erreur HTTP : ${response.status}`);
         }
         const text = await response.text();
@@ -113,87 +97,6 @@ async function loadPageScript(filepath, args = []) {
             }
         } else {
             console.error(`Erreur lors de l'import de ${filepath}:`, err);
-=======
-            return null;
-        }
-        const data = await response.json();
-        console.log('Données reçues:', data);
-        if (data.error) return `<p>${data.error}</p>`;
-
-        if (resource === 'products') {
-            if (!Array.isArray(data) || data.length === 0) {
-                return '<p>Aucun produit trouvé.</p>';
-            }
-            return `
-                <h1>Nos Produits</h1>
-                <div class="products-list">
-                    ${data.map(product => `
-                        <div class="product-item">
-                            <h3>${product.name}</h3>
-                            <p>Prix : ${product.price} €</p>
-                            <button class="add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}">Ajouter au panier</button>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        if (data.content) {
-            if (data.title) {
-                document.title = data.title;
-            }
-            return data.content;
-        }
-
-        return `
-            <h1>${resource.charAt(0).toUpperCase() + resource.slice(1)}</h1>
-            <div>${data.message || data.info || 'Contenu non défini'}</div>
-        `;
-    } catch (err) {
-        console.error('Erreur dans getApiContent:', err);
-        return '<p>Erreur lors du chargement de la page.</p>';
-    }
-}
-
-let CURRENT_PAGE = null;
-
-export async function loadPage(page, args = []) {
-    console.log('Chargement de la page:', page);
-    if (page !== CURRENT_PAGE) {
-        clearMainContainer();
-        CURRENT_PAGE = page;
-    }
-    removeOldLinks(page);
-
-    const content = await getApiContent(page);
-    if (!content) page = '404';
-
-    await displayPageHTML(content);
-    await loadPageStyle(page, `css/${page}.css`);
-    await loadPageScript(`js/pages/${page}.js`, args);
-}
-
-async function displayPageHTML(html) {
-    MAIN_CONTAINER.innerHTML = html;
-    console.log('HTML affiché:', html);
-}
-
-async function loadPageStyle(filename, filepath) {
-    if (await fileExists(filepath) && !linkAlreadyExists(filename)) {
-        document.head.appendChild(createCSSLink(filename, filepath));
-    }
-}
-
-async function loadPageScript(filepath, args) {
-    try {
-        const script = await import(`./${filepath}`);
-        if (typeof script.init === 'function') script.init(...args);
-    } catch (err) {
-        if (err.message.includes('404')) {
-            console.warn(`Le script ${filepath} n'existe pas`);
-        } else {
-            console.error(`Erreur dans le fichier ${filepath}`, err);
->>>>>>> 5bf764b (refont backend)
         }
     }
 }
@@ -219,7 +122,6 @@ function linkAlreadyExists(filename) {
 }
 
 function clearMainContainer() {
-<<<<<<< HEAD
     if (MAIN_CONTAINER) {
         MAIN_CONTAINER.innerHTML = '';
     } else {
@@ -243,24 +145,15 @@ export async function loadPage(page, args = []) {
 
     await loadPageStyle(page, `/css/${page}.css`); // Chemin absolu pour CSS
     await loadPageScript(`${page}.js`, args);
-=======
-    MAIN_CONTAINER.innerHTML = '';
->>>>>>> 5bf764b (refont backend)
 }
 
 // Gérer la navigation
 document.addEventListener('DOMContentLoaded', () => {
-<<<<<<< HEAD
     if (!MAIN_CONTAINER) {
         console.error('MAIN_CONTAINER non initialisé');
         return;
     }
     const navLinks = document.querySelectorAll('.nav-link');
-=======
-    console.log('DOM chargé, initialisation de PageLoader');
-    const navLinks = document.querySelectorAll('.nav-link');
-
->>>>>>> 5bf764b (refont backend)
     const initialPage = new URLSearchParams(window.location.search).get('resource') || 'home';
     loadPage(initialPage);
 

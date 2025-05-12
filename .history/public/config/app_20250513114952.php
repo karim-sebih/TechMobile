@@ -15,7 +15,7 @@ require_once __DIR__ . '/../../App/Models/ProductComponentItems.php'; // Chemin 
 
 // Charger les contrôleurs
 require_once __DIR__ . '/../../App/Controllers/HomeController.php';
-
+require_once __DIR__ . '/../../App/Controllers/ProductsController.php';
 
 // Charger le routeur
 require_once __DIR__ . '/../../App/Core/Router.php';

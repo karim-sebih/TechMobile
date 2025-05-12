@@ -7,7 +7,6 @@ class HomeController extends Controller
 {
     public function index($params = [])
     {
-<<<<<<< HEAD
         $homeFile = __DIR__ . '/../../Public/Views/home.php';
         if (!file_exists($homeFile)) {
             error_log("HomeController.php - Fichier home.php non trouvé à : " . $homeFile);
@@ -31,25 +30,11 @@ class HomeController extends Controller
             echo json_encode(['error' => 'Erreur dans home.php : ' . $e->getMessage()]);
             exit;
         }
-=======
-        // Vérifier si le fichier home.php existe
-        $homeFile = __DIR__ . '/../../Public/Views/home.php';
-        if (!file_exists($homeFile)) {
-            http_response_code(500);
-            echo json_encode(['error' => 'Fichier home.php non trouvé à : ' . $homeFile]);
-            exit;
-        }
-
-        ob_start();
-        include $homeFile;
-        $htmlContent = ob_get_clean();
->>>>>>> 5bf764b (refont backend)
 
         $data = [
             'title' => 'Accueil - TechMobile',
             'content' => $htmlContent
         ];
-<<<<<<< HEAD
         header('Content-Type: application/json');
         echo json_encode($data);
     }
@@ -57,8 +42,5 @@ class HomeController extends Controller
     public function about($params = [])
     {
         echo json_encode(['title' => 'À propos - TechMobile', 'content' => '<h2>À propos</h2><p>Bienvenue sur TechMobile !</p>']);
-=======
-        echo json_encode($data);
->>>>>>> 5bf764b (refont backend)
     }
 }

@@ -69,6 +69,7 @@ addToCartButtons.forEach(button => {
     });
 });
 function updateCart() {
+<<<<<<< HEAD
     // Update cart count
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     cartCount.textContent = totalItems;
@@ -85,6 +86,24 @@ function updateCart() {
             const cartItemElement = document.createElement('div');
             cartItemElement.className = 'flex py-4 border-b';
             cartItemElement.innerHTML = `
+=======
+// Update cart count
+const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+cartCount.textContent = totalItems;
+// Update cart items
+if (cart.length === 0) {
+cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">Your cart is empty</p>';
+cartSubtotal.textContent = '$0.00';
+} else {
+cartItems.innerHTML = '';
+let subtotal = 0;
+cart.forEach(item => {
+const itemTotal = item.price * item.quantity;
+subtotal += itemTotal;
+const cartItemElement = document.createElement('div');
+cartItemElement.className = 'flex py-4 border-b';
+cartItemElement.innerHTML = `
+>>>>>>> 5bf764b (refont backend)
 /* faire un template,avec fetch  */
 <div class="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center p-2">
 
