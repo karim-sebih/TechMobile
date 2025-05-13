@@ -26,7 +26,6 @@ async function getApiContent(resource) {
             return null;
         }
         const data = await response.json();
-        console.log('Données reçues:', data);
         if (data.error) return `<p>${data.error}</p>`;
 
         if (resource === 'products') {
@@ -84,7 +83,7 @@ export async function loadPage(page, args = []) {
 
 async function displayPageHTML(html) {
     MAIN_CONTAINER.innerHTML = html;
-    console.log('HTML affiché:', html);
+   
 }
 
 async function loadPageStyle(filename, filepath) {

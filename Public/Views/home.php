@@ -145,19 +145,19 @@ try {
     <br>
   
 
-    <div class="products-display">
-  <h2>Products :</h2>
+    
 
     <div class="products-display">
         <h2>Produits :</h2>
+        <br>
         <div class="products-list">
             <?php 
             if (!empty($products)) {
                 foreach ($products as $product) {
                     echo '<div class="product-item">';
-                    echo '<img src="' . htmlspecialchars($product['image_url']) . '" alt="' . htmlspecialchars($product['name']) . '" class="product-image">';
+                    echo '<img src="' . htmlspecialchars($product['image_url']) . '"" class="product-image"><br>';
                     echo '<h3>' . htmlspecialchars($product['name']) . '</h3>';
-                    echo '<p>Prix : ' . htmlspecialchars($product['price']) . ' €</p>';
+                    echo '<p>Prix : ' . htmlspecialchars($product['price']) . ' €</p><br>';
                     echo '<button class="add-to-cart" data-id="' . $product['id'] . '" data-name="' . htmlspecialchars($product['name']) . '" data-price="' . $product['price'] . '">Ajouter au panier</button>';
                     echo '</div>';
                 }

@@ -59,10 +59,6 @@ body{
     }
   }
   
-<<<<<<< HEAD
-
-=======
->>>>>>> 5bf764b (refont backend)
   .hero-title {
     font-size: 1.875rem;
     font-weight: bold;
@@ -138,10 +134,7 @@ body{
   
   .phone-image {
     width: 100%;
-<<<<<<< HEAD
     border-radius: 30px;
-=======
->>>>>>> 5bf764b (refont backend)
     max-width: 400px;
   }
 
@@ -167,11 +160,6 @@ body{
 }
 
 
-.products-display{
-  text-align: center;
-  
-    padding: 20px 0;
-}
 
 
 
@@ -220,11 +208,23 @@ body{
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
-<<<<<<< HEAD
-
 
 
 .products-display{
+  text-align: center;
+  
+    padding: 20px 0;
+}
+
+.products-list{
+  display: flex;
+  flex-wrap: wrap;
+  
+  justify-content: center;
+  gap: 20px;
+}
+
+.product-item{
   background: white;
   border-radius: 8px;
   padding: 15px;
@@ -232,7 +232,7 @@ body{
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   width: 22%;
-  max-height: 300px;
+ 
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -249,8 +249,6 @@ body{
 
 
 
-=======
->>>>>>> 5bf764b (refont backend)
   .icon-wrapper {
     width: 4rem;
     height: 4rem;
