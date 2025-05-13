@@ -88,9 +88,7 @@ function updateCart() {
 /* faire un template,avec fetch  */
 <div class="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center p-2">
 
-<img src="${item.image}" alt="${item.name}" class="max-h-full
-
-max-w-full">
+        <img src="${item.image}" alt="${item.name}" class="max-h-full max-w-full">
 </div>
 <div class="ml-4 flex-grow">
 <h4 class="font-medium">${item.name}</h4>

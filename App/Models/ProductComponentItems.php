@@ -9,7 +9,7 @@ class ProductComponentItems {
     public static function init() {
         try {
             self::$db = \Database::getInstance();
-            error_log("ProductComponentItems.php - Initialisation réussie avec la base 'tmobile'");
+            error_log("ProductComponentItems.php - Initialisation réussie avec la base 'tmobile' à " . date('Y-m-d H:i:s'));
         } catch (Exception $e) {
             error_log("ProductComponentItems.php - Erreur lors de l'initialisation : " . $e->getMessage());
             self::$db = null;
@@ -23,27 +23,13 @@ class ProductComponentItems {
         }
 
         try {
-            $sql = "SELECT * FROM products WHERE 1=1";
+            $sql = "SELECT p.*, pi.image_url 
+                    FROM products p 
+                    LEFT JOIN product_images pi ON p.id = pi.product_id AND pi.is_primary = 1";
             $params = [];
 
-            if (isset($filters['category_id'])) {
-                $sql .= " AND category_id = :category_id";
-                $params[':category_id'] = $filters['category_id'];
-            }
-            if (isset($filters['is_featured'])) {
-                $sql .= " AND is_featured = :is_featured";
-                $params[':is_featured'] = $filters['is_featured'];
-            }
+            $sql .= " ORDER BY p.created_at DESC"; // Ordre par défaut
 
-            if (isset($filters['order'])) {
-                $validOrders = ['created_at DESC', 'created_at ASC', 'price DESC', 'price ASC'];
-                if (in_array($filters['order'], $validOrders)) {
-                    $sql .= " ORDER BY " . $filters['order'];
-                } else {
-                    error_log("ProductComponentItems.php - Valeur d'ordre invalide : " . $filters['order']);
-                    $sql .= " ORDER BY created_at DESC";
-                }
-            }
             if (isset($filters['limit'])) {
                 $sql .= " LIMIT " . (int)$filters['limit'];
             }

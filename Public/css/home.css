@@ -216,6 +216,15 @@ body{
     padding: 20px 0;
 }
 
+.products-list img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+
 .products-list{
   display: flex;
   flex-wrap: wrap;
