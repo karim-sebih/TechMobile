@@ -1,13 +1,4 @@
 export function init() {
-<<<<<<< HEAD
-    console.log('Page d\'accueil chargée !');
-    const productsDisplay = document.querySelector('.products-display');
-    if (!productsDisplay) {
-        console.error('.products-display non trouvé dans le DOM');
-        return;
-    }
-    console.log('Contenu de products-display:', productsDisplay.innerHTML);
-=======
     // Charger les produits pour la section "products-display"
     fetch('router.php?resource=products', {
         method: 'GET',
@@ -38,5 +29,4 @@ export function init() {
         console.error('Erreur lors du chargement des produits :', err);
         document.querySelector('.products-display').innerHTML += '<p>Erreur lors du chargement des produits.</p>';
     });
->>>>>>> 5bf764b (refont backend)
 }

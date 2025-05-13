@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-<<<<<<< HEAD
 // Vérifier les fichiers
 $databasePath = __DIR__ . '\..\config\database.php';
 if (!file_exists($databasePath)) {
@@ -113,45 +112,6 @@ try {
             </div>
         </div>
         <br>
-=======
-<section class="hero-gradient text-white py-section">
-    <div class="container hero-flex">
-      
-      <div class="text-content">
-        <h2 class="hero-title">Les Derniers Smartphones</h2>
-        <p class="hero-subtitle">
-        Découvrez notre collection premium d'appareils mobiles de pointe avec les meilleurs prix et garantie.
-        </p>
-        <div class="button-group">
-          <button class="btn-primary">Shop Now</button>
-          <button class="btn-secondary">View Deals</button>
-        </div>
-      </div>
-      
-      <div class="image-content">
-        <img
-          src="https://imgs.search.brave.com/5E37AR9HklxRGjsqiG8MPZD1zt8csn99eDyKzVdOp6I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/emRuZXQuZnIvd3At/Y29udGVudC91cGxv/YWRzL3pkbmV0LzIw/MjUvMDQvaXBob25l/LTE1LXByby1tYXgt/d2hpdGUtMS03NTB4/NDEwLndlYnA"
-          alt="Premium Smartphones"
-          class="phone-image"
-        />
-      </div>
-</section>
-    </div>
-<div class="shop-by-categorie">
-    <div class="content">
-
-    </div>
-</div>
-<div class="features">
-    <div class="feature-content">
-    <h2 class="title">Shop by Category</h2>
-    <br>
-
-<div class="grid">
-  <div class="card">
-    <div class="icon-wrapper indigo">
-      <i class="fas fa-mobile-alt icon indigo-color"></i>
->>>>>>> 5bf764b (refont backend)
     </div>
     <h3 class="card-title">Flagship Phones</h3>
     <p class="card-desc">Premium devices</p>
@@ -188,7 +148,6 @@ try {
     <div class="products-display">
   <h2>Products :</h2>
 
-<<<<<<< HEAD
     <div class="products-display">
         <h2>Produits :</h2>
         <div class="products-list">
@@ -208,12 +167,6 @@ try {
             ?>
         </div>
     </div>
-=======
-</div>
-
-
-<div class="title"><h2>The Brands we sell :</h2></div>
->>>>>>> 5bf764b (refont backend)
 
     <div class="title"><h2>Les marques que nous vendons :</h2></div>
 

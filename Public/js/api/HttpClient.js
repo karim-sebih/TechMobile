@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import HttpClient from "./HttpClient.js";
->>>>>>> 5bf764b (refont backend)
 import { ROUTER_PATH } from "../config.js";
 
 function Router(resource) {

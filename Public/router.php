@@ -4,7 +4,6 @@ require_once __DIR__ . '/config/app.php';
 use App\Core\Router;
 
 $Router = new Router();
-<<<<<<< HEAD
 $Router->redirect();
 
 try {
@@ -15,6 +14,3 @@ try {
     echo json_encode(['error' => 'Erreur de connexion à la base : ' . $e->getMessage()]);
     exit;
 }
-=======
-$Router->redirect();
->>>>>>> 5bf764b (refont backend)
