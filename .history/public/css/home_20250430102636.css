@@ -1,0 +1,18 @@
+/* Public/css/home.css */
+main {
+    background-color: #e6f3ff; /* Fond bleu clair pour la page d'accueil */
+}
+
+main p {
+    font-size: 1.2rem;
+    color: #0056b3;
+    font-weight: bold;
+}
+
+main h1 {
+    font-size: 2.5rem;
+    color: #0056b3;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
