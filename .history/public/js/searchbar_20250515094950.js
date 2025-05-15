@@ -7,85 +7,35 @@ if (mobileMenuBtn && mobileMenu) {
     });
 }
 
-// Search Bar Toggle (approche simplifiée et robuste)
-document.addEventListener('DOMContentLoaded', () => {
-    // Fonction pour initialiser la barre de recherche
-    const initSearchBar = () => {
-        const searchBtn = document.getElementById('search-btn');
-        const searchBar = document.getElementById('search-bar');
-        const searchInput = document.getElementById('search-input');
-        const searchSubmit = document.getElementById('search-submit');
+// Search Bar Toggle
+const searchBtn = document.getElementById('search-btn');
+const searchBar = document.getElementById('search-bar');
+const searchInput = document.getElementById('search-input');
+const searchSubmit = document.getElementById('search-submit');
 
-        console.log('Tentative d’initialisation de la barre de recherche :', {
-            searchBtn,
-            searchBar,
-            searchInput,
-            searchSubmit
-        });
-
-        if (searchBtn && searchBar && searchInput && searchSubmit) {
-            // Gestion directe du clic avec délégation
-            document.addEventListener('click', (e) => {
-                if (e.target.closest('#search-btn')) {
-                    console.log('Clic sur searchBtn détecté');
-                    // Basculer l'affichage en manipulant directement le style
-                    const isHidden = searchBar.style.display === 'none' || searchBar.classList.contains('hidden');
-                    if (isHidden) {
-                        searchBar.style.display = 'block'; // Forcer l'affichage
-                        searchBar.classList.remove('hidden');
-                        searchInput.focus();
-                        console.log('Barre de recherche affichée');
-                    } else {
-                        searchBar.style.display = 'none'; // Forcer le masquage
-                        searchBar.classList.add('hidden');
-                        console.log('Barre de recherche masquée');
-                    }
-                }
-            });
-
-            // Soumission de la recherche
-            searchSubmit.addEventListener('click', () => {
-                const query = searchInput.value.trim();
-                if (query) {
-                    console.log('Recherche soumise avec query :', query);
-                    window.location.href = `index.php?resource=products&search=${encodeURIComponent(query)}`;
-                }
-            });
-
-            // Soumission par Entrée
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    console.log('Touche Entrée pressée');
-                    searchSubmit.click();
-                }
-            });
-
-            // Arrêter la tentative répétée une fois les éléments trouvés
-            return true;
-        } else {
-            console.warn('Éléments de la barre de recherche non trouvés, nouvelle tentative dans 500ms');
-            return false;
+if (searchBtn && searchBar && searchInput && searchSubmit) {
+    searchBtn.addEventListener('click', () => {
+        searchBar.classList.toggle('hidden');
+        if (!searchBar.classList.contains('hidden')) {
+            searchInput.focus();
         }
-    };
+    });
 
-    // Essayer d'initialiser immédiatement
-    if (!initSearchBar()) {
-        // Si les éléments ne sont pas trouvés, réessayer toutes les 500ms jusqu'à 5 secondes
-        let attempts = 0;
-        const maxAttempts = 10; // 10 tentatives = 5 secondes
-        const interval = setInterval(() => {
-            attempts++;
-            if (initSearchBar()) {
-                clearInterval(interval);
-            } else if (attempts >= maxAttempts) {
-                console.error('Échec de l’initialisation de la barre de recherche après 5 secondes');
-                clearInterval(interval);
-            }
-        }, 500);
-    }
-});
+    searchSubmit.addEventListener('click', () => {
+        const query = searchInput.value.trim();
+        if (query) {
+            window.location.href = `index.php?resource=products&search=${encodeURIComponent(query)}`;
+        }
+    });
 
-// Shopping Cart Functionality (inchangé)
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            searchSubmit.click();
+        }
+    });
+}
+
+// Shopping Cart Functionality
 const cartBtn = document.getElementById('cart-btn');
 const closeCart = document.getElementById('close-cart');
 const cartPanel = document.getElementById('cart-panel');
@@ -123,7 +73,7 @@ if (cartBtn && closeCart && cartPanel && cartOverlay && cartCount && cartItems &
     updateCart();
 }
 
-// Add to Cart Functionality (inchangé)
+// Add to Cart Functionality (avec délégation d'événements)
 document.addEventListener('click', (e) => {
     if (e.target.closest('.add-to-cart')) {
         const button = e.target.closest('.add-to-cart');

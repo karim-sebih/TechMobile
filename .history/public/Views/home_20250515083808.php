@@ -60,7 +60,7 @@ try {
             </p>
             <div class="button-group">
                 <button class="btn-primary">Shop Now</button>
-                <button class="btn-secondary"><a href="index.php?resource=home#products-list">View Deals</a></button>
+                <button class="btn-secondary">View Deals</button>
             </div>
         </div>
         <div class="image-content">
@@ -124,7 +124,8 @@ try {
                 echo '<img src="' . $imageUrl . '" alt="' . htmlspecialchars($product['name']) . '" class="product-image"><br>';
                 echo '<h3>' . htmlspecialchars($product['name']) . '</h3>';
                 echo '<p>Prix : ' . htmlspecialchars($product['price']) . ' €</p><br>';
-echo '<button class="add-to-cart" data-id="' . $product['id'] . '" data-name="' . htmlspecialchars($product['name']) . '" data-price="' . $product['price'] . '" data-image="' . $imageUrl . '">Ajouter au panier</button>';                echo '</div>';
+                echo '<button class="add-to-cart" data-id="' . $product['id'] . '" data-name="' . htmlspecialchars($product['name']) . '" data-price="' . $product['price'] . '" data-image="' . $imageUrl . '">Ajouter au panier</button>';
+                echo '</div>';
             }
         } else {
             echo '<p>Aucun produit disponible.</p>';

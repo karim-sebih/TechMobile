@@ -60,7 +60,7 @@ try {
             </p>
             <div class="button-group">
                 <button class="btn-primary">Shop Now</button>
-                <button class="btn-secondary"><a href="index.php?resource=home#products-list">View Deals</a></button>
+                <a href="#"><button class="btn-secondary">View Deals</button></a>
             </div>
         </div>
         <div class="image-content">

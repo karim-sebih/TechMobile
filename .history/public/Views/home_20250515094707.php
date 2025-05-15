@@ -60,7 +60,7 @@ try {
             </p>
             <div class="button-group">
                 <button class="btn-primary">Shop Now</button>
-                <button class="btn-secondary"><a href="index.php?resource=home#products-list">View Deals</a></button>
+                <button class="btn-secondary">View Deals</button>
             </div>
         </div>
         <div class="image-content">
@@ -118,13 +118,14 @@ try {
         <?php 
         if (!empty($products)) {
             foreach ($products as $product) {
-                // Utiliser l'image de product_images si disponible, sinon celle par défaut
-                $imageUrl = !empty($product['image_url']) ? htmlspecialchars($product['image_url']) : 'https://via.placeholder.com/150';
+                // Utiliser l'image de product_images si disponible, sinon celle de products
+                $imageUrl = !empty($product['image_url']) ? htmlspecialchars($product['image_url']) : (!empty($product['image_url']) ? htmlspecialchars($product['image_url']) : 'https://via.placeholder.com/150');
                 echo '<div class="product-item">';
                 echo '<img src="' . $imageUrl . '" alt="' . htmlspecialchars($product['name']) . '" class="product-image"><br>';
                 echo '<h3>' . htmlspecialchars($product['name']) . '</h3>';
                 echo '<p>Prix : ' . htmlspecialchars($product['price']) . ' €</p><br>';
-echo '<button class="add-to-cart" data-id="' . $product['id'] . '" data-name="' . htmlspecialchars($product['name']) . '" data-price="' . $product['price'] . '" data-image="' . $imageUrl . '">Ajouter au panier</button>';                echo '</div>';
+                echo '<button class="add-to-cart" data-id="' . $product['id'] . '" data-name="' . htmlspecialchars($product['name']) . '" data-price="' . $product['price'] . '">Ajouter au panier</button>';
+                echo '</div>';
             }
         } else {
             echo '<p>Aucun produit disponible.</p>';
@@ -132,6 +133,7 @@ echo '<button class="add-to-cart" data-id="' . $product['id'] . '" data-name="' 
         ?>
     </div>
 </div>
+
 <div class="title"><h2>Les marques que nous vendons :</h2></div>
 
 <div class="brand">

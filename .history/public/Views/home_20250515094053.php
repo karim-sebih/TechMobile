@@ -59,8 +59,8 @@ try {
                 Découvrez notre collection premium d'appareils mobiles de pointe avec les meilleurs prix et garantie.
             </p>
             <div class="button-group">
-                <button class="btn-primary">Shop Now</button>
-                <button class="btn-secondary"><a href="index.php?resource=home#products-list">View Deals</a></button>
+                <button class="btn-primary"><a href="#products-display"></a>Shop Now</button>
+                <button class="btn-secondary">View Deals</button>
             </div>
         </div>
         <div class="image-content">
