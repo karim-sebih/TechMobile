@@ -107,28 +107,17 @@ switch ($resource) {
         break;
 
     case 'create_product':
-        // Page protégée : nécessite un rôle admin ou moderateur
+        // Page protégée : nécessitent un rôle admin ou moderateur
         if (!isset($_SESSION['user_id']) || !in_array($_SESSION['user_role'], ['admin', 'moderateur'])) {
             header("Location: index.php?resource=login");
             exit;
         }
         if (file_exists($viewPath)) {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'add_product') {
-                // Pour une requête POST avec action=add_product, inclure directement create_product.php
-                // et laisser sa réponse JSON intacte
-                include $viewPath;
-                exit;
-            } else {
-                // Pour une requête GET, retourner le formulaire
-                ob_start();
-                include $viewPath;
-                $content = ob_get_clean();
-                sendJsonResponse([
-                    'content' => $content,
-                    'title' => 'Créer un produit - TechMobile'
-                ]);
-            }
+            error_log("router.php - Chargement de create_product.php");
+            include $viewPath; // Charger directement sans JSON pour éviter PageLoader.js
+            exit;
         } else {
+            error_log("router.php - create_product.php non trouvé à $viewPath");
             sendJsonResponse([
                 'error' => 'Page non trouvée',
                 'title' => '404 - Page non trouvée'

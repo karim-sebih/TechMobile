@@ -1,7 +1,5 @@
 <?php
 session_start(); // Initialiser la session
-$_SESSION['user_id'] = 3; // Karim (admin)
-$_SESSION['user_role'] = 'admin';
 require __DIR__ . '/config/app.php';
 
 // Vérifier si l'utilisateur est connecté et a le bon rôle pour afficher le lien "Admin"
@@ -17,8 +15,8 @@ $isLoggedIn = isset($_SESSION['user_id']);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <link rel="stylesheet" href="./css/index.css">
-     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -148,5 +146,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
 
     <script src="./js/searchbar.js"></script>
     <script type="module" src="./js/core/PageLoader.js"></script>
+    
 </body>
 </html>

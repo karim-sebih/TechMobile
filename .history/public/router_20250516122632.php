@@ -106,52 +106,7 @@ switch ($resource) {
         }
         break;
 
-    case 'create_product':
-        // Page protégée : nécessite un rôle admin ou moderateur
-        if (!isset($_SESSION['user_id']) || !in_array($_SESSION['user_role'], ['admin', 'moderateur'])) {
-            header("Location: index.php?resource=login");
-            exit;
-        }
-        if (file_exists($viewPath)) {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'add_product') {
-                // Pour une requête POST avec action=add_product, inclure directement create_product.php
-                // et laisser sa réponse JSON intacte
-                include $viewPath;
-                exit;
-            } else {
-                // Pour une requête GET, retourner le formulaire
-                ob_start();
-                include $viewPath;
-                $content = ob_get_clean();
-                sendJsonResponse([
-                    'content' => $content,
-                    'title' => 'Créer un produit - TechMobile'
-                ]);
-            }
-        } else {
-            sendJsonResponse([
-                'error' => 'Page non trouvée',
-                'title' => '404 - Page non trouvée'
-            ], 404);
-        }
-        break;
-
-    case 'products':
-        // Route pour récupérer la liste des produits
-        require_once __DIR__ . '/config/database.php';
-        try {
-            $db = \Database::getInstance();
-            $stmt = $db->prepare("SELECT * FROM products WHERE is_active = 1 ORDER BY created_at DESC LIMIT 10");
-            $stmt->execute();
-            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            sendJsonResponse($products);
-        } catch (Exception $e) {
-            sendJsonResponse([
-                'error' => 'Erreur lors de la récupération des produits : ' . $e->getMessage()
-            ], 500);
-        }
-        break;
-
+  
     default:
         // Si la ressource n'existe pas, retourner une erreur 404
         sendJsonResponse([
@@ -159,4 +114,41 @@ switch ($resource) {
             'title' => '404 - Page non trouvée'
         ], 404);
         break;
+
+
+        case 'admin':
+    if (!isset($_SESSION['user_id']) || !in_array($_SESSION['user_role'], ['admin', 'moderateur'])) {
+        header("Location: index.php?resource=login");
+        exit;
+    }
+    if (file_exists($viewPath)) {
+        ob_start();
+        include $viewPath;
+        $content = ob_get_clean();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
+            $product_name = $_POST['product_name'] ?? '';
+            $price = $_POST['price'] ?? 0;
+            $image_url = $_POST['image_url'] ?? '';
+            $is_active = isset($_POST['is_active']) ? 1 : 0;
+
+            try {
+                $db = \Database::getInstance();
+                $stmt = $db->prepare("INSERT INTO products (product_name, price, image_url, is_active, created_at) VALUES (:product_name, :price, :image_url, :is_active, NOW())");
+                $stmt->execute([
+                    'product_name' => $product_name,
+                    'price' => $price,
+                    'image_url' => $image_url,
+                    'is_active' => $is_active
+                ]);
+                sendJsonResponse(['success' => true], 200);
+            } catch (Exception $e) {
+                sendJsonResponse(['error' => 'Erreur lors de l\'ajout : ' . $e->getMessage()], 500);
+            }
+        } else {
+            sendJsonResponse(['content' => $content, 'title' => 'Admin - TechMobile']);
+        }
+    } else {
+        sendJsonResponse(['error' => 'Page non trouvée', 'title' => '404 - Page non trouvée'], 404);
+    }
+    break;
 }

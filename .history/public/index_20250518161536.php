@@ -8,6 +8,22 @@ require __DIR__ . '/config/app.php';
 $showAdminLink = isset($_SESSION['user_id']) && in_array($_SESSION['user_role'], ['admin', 'moderateur']);
 // Vérifier si l'utilisateur est connecté pour afficher "Déconnexion" au lieu de "Connexion"
 $isLoggedIn = isset($_SESSION['user_id']);
+
+// Gestion basique du routage
+$resource = $_GET['resource'] ?? 'home';
+$pageContent = '';
+
+switch ($resource) {
+    case 'create_product':
+        ob_start();
+        include __DIR__ . '/Public/Views/create_product.php';
+        $pageContent = ob_get_clean();
+        break;
+    // Ajoute d'autres cas si nécessaire (home, products, etc.)
+    default:
+        $pageContent = '<h2>Bienvenue sur TechMobile</h2><p>Page par défaut.</p>';
+        break;
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +34,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="./css/index.css">
-     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -90,7 +106,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
     </header>
 
     <main id="BodyLine">
-        <!-- Le contenu sera chargé dynamiquement par PageLoader.js -->
+        <?php echo $pageContent; ?>
     </main>
 
     <footer class="footer">
