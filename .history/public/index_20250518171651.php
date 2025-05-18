@@ -1,6 +1,7 @@
 <?php
 session_start(); // Initialiser la session
-
+$_SESSION['user_id'] = 3; // Karim (admin)
+$_SESSION['user_role'] = 'admin';
 require __DIR__ . '/config/app.php';
 
 // Vérifier si l'utilisateur est connecté et a le bon rôle pour afficher le lien "Admin"
@@ -35,7 +36,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
                 <?php if ($showAdminLink): ?>
                     <a href="index.php?resource=admin" class="nav-link">Admin</a>
                 <?php endif; ?>
-                <a href="index.php?resource=<?php echo $isLoggedIn ? 'user_logout' : 'login'; ?>" class="nav-link">
+                <a href="index.php?resource=<?php echo $isLoggedIn ? 'logout' : 'login'; ?>" class="nav-link">
                     <?php echo $isLoggedIn ? 'Déconnexion' : 'Connexion'; ?>
                 </a>
             </nav>
@@ -57,7 +58,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
                     <li><a href="index.php?resource=admin" class="nav-link">Admin</a></li>
                 <?php endif; ?>
                 <li>
-                    <a href="index.php?resource=<?php echo $isLoggedIn ? 'user_logout' : 'login'; ?>" class="nav-link">
+                    <a href="index.php?resource=<?php echo $isLoggedIn ? 'user_logou' : 'login'; ?>" class="nav-link">
                         <?php echo $isLoggedIn ? 'Déconnexion' : 'Connexion'; ?>
                     </a>
                 </li>

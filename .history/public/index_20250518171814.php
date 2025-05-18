@@ -1,5 +1,6 @@
 <?php
 session_start(); // Initialiser la session
+session_destroy();
 
 require __DIR__ . '/config/app.php';
 

@@ -1,6 +1,7 @@
 <?php
 session_start(); // Initialiser la session
-
+$_SESSION['user_id'] = 3; // Karim (admin)
+$_SESSION['user_role'] = 'admin';
 require __DIR__ . '/config/app.php';
 
 // Vérifier si l'utilisateur est connecté et a le bon rôle pour afficher le lien "Admin"
