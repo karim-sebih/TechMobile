@@ -1,0 +1,13 @@
+/* Public/css/home.css */
+displa {
+    background-color: #e6f3ff; /* Fond bleu clair pour la page d'accueil */
+}
+
+main
+ H1,
+ h2  {
+
+    color: #ffffff;
+    font-weight: bold;
+}
+
